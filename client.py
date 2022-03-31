@@ -34,7 +34,7 @@ if __name__ == "__main__":
                         requests.post(url.upload_params, json=data)
                         with open(f"{file_name}", "rb") as file:
                             new_part_id = 0
-                            div_counter = threads_count
+                            div_counter = int(threads_count)
                             while True:
                                 part_size = file_size
                                 if file_size % div_counter != 0:
