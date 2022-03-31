@@ -15,7 +15,6 @@ if __name__ == "__main__":
     command = None
     file_name = None
     threads_count = 1
-    #  file_name = "test.jpg"
     while command != "exit":
         command = input("available commands:\t\n count_threads \t\n file_name \t\n transfer_file \t\n exit \t\n").split()
         match command[0]:
@@ -49,9 +48,11 @@ if __name__ == "__main__":
                                 new_part_id += 1
                                 if new_part_id == threads_count:
                                     break
-                        # message_json = requests.get(url.upload_file)
-
-                    # print(message_json.json()["message"])
+                        result = requests.get(url.upload_file)
+                        if result.status_code == 200:
+                            print("Your file has been uploaded successfully!\n")
+                        else:
+                            print("Oh, something went wrong...\n")
             case "exit":
                 print("Ok, goodbye!")
                 break

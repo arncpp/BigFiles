@@ -54,7 +54,7 @@ class UploadFileData:
                         self.size_of_transferred_file = os.path.getsize(f"{user_file.name}")
             shutil.rmtree(self.USER_TEMP_FOLDER)
 
-    def file_integrity_check(self) -> bool:
+    def integrity_check(self) -> bool:
         if self.file_is_upload is True:
             if self.size_of_transferred_file == self.file_size:
                 return True
@@ -76,6 +76,8 @@ def upload_file():
     file_data.part_of_file_is_uploaded(part_id)
     file_data.file_is_uploaded()
     file_data.save_file()
+    if file_data.integrity_check():
+        return request.json
     del current_users[request.remote_addr]
     return request.json
 
