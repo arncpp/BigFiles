@@ -1,7 +1,7 @@
 import ast
 import os
 import shutil
-from flask import Flask, request
+from flask import Flask, request, Response
 
 app = Flask(__name__)
 
@@ -65,7 +65,7 @@ current_users = {}
 users = {}
 
 
-@app.route('/upload', methods=["POST", "GET"])
+@app.route('/upload', methods=["POST"])
 def upload_file():
     file_data = current_users[request.remote_addr]
     part_id = request.json["id"]

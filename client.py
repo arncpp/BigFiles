@@ -28,7 +28,7 @@ if __name__ == "__main__":
                 else:
                     reply = input((f"Your file name is {file_name}, "
                                    f"number of threads is {threads_count}. Are you sure? \t\n YES/NO \n"))
-                    if reply == "YES":
+                    if reply == "YES" and os.path.exists(file_name):
                         file_size = os.path.getsize(file_name)
                         data = {"threads_count": threads_count, "file_name": file_name, "file_size": file_size}
                         requests.post(url.upload_params, json=data)
@@ -48,11 +48,10 @@ if __name__ == "__main__":
                                 new_part_id += 1
                                 if new_part_id == threads_count:
                                     break
-                        result = requests.get(url.upload_file)
-                        if result.status_code == 200:
-                            print("Your file has been uploaded successfully!\n")
-                        else:
-                            print("Oh, something went wrong...\n")
+                        print("Your file has been uploaded successfully!\n")
+                    else:
+                        print("There is no such file!\n")
+
             case "exit":
                 print("Ok, goodbye!")
                 break
