@@ -1,7 +1,7 @@
 import ast
 import os
 import shutil
-from flask import Flask, request, Response
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -77,18 +77,18 @@ def upload_file():
     file_data.file_is_uploaded()
     file_data.save_file()
     if file_data.integrity_check():
+        del current_users[request.remote_addr]
         return request.json
-    del current_users[request.remote_addr]
     return request.json
 
 
 @app.route('/params', methods=["POST"])
 def get_params():
-    file_data = UploadFileData(request.remote_addr, request.json["file_size"], request.json["threads_count"],
+    file_data = UploadFileData(request.remote_addr, request.json["file_size"], int(request.json["threads_count"]),
                                request.json["file_name"])
     current_users[request.remote_addr] = file_data
-    if users:
-        new_id = max(users, key=users.get) + 1
+    if request.remote_addr in users:
+        new_id = max(users.values()) + 1
         users[request.remote_addr] = new_id
     else:
         users[request.remote_addr] = 0

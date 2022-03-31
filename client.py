@@ -46,7 +46,7 @@ if __name__ == "__main__":
                                 t.daemon = True
                                 t.start()
                                 new_part_id += 1
-                                if new_part_id == threads_count:
+                                if new_part_id == int(threads_count):
                                     break
                         print("Your file has been uploaded successfully!\n")
                     else:
