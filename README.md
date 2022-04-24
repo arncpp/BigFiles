@@ -1,4 +1,4 @@
-<h1 id="earley-algorithm">Задача 233. Передача файлов</h1>
+<h1 id="earley-algorithm">Передача больших файлов</h1>
 </blockquote>
 <h1 id="-arncpp">Гайд по запуску проекта</h1>
 <h2 id="-pycharm">Как запустить проект через консоль</h2>
